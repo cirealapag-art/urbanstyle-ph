@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>UrbanStyle PH – Local brand shoes, sandals and bags</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap">
+<style>
+:root{--bg:#f7f3ec;--soft:#e6dac8;--ink:#3b2a20;--muted:#6f5f52;--line:#d9ccb8;--brand:#b8864b;--brand-ink:#2a1d14;--brand-text:#8a5f2a;
+--display:'Playfair Display',Georgia,serif;--body:'Jost',system-ui,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1f1812;--soft:#2a2119;--ink:#f1e9de;--muted:#b9a998;--line:#3d3126;--brand:#c9985a;--brand-ink:#1f1812;--brand-text:#c9985a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1f1812;--soft:#2a2119;--ink:#f1e9de;--muted:#b9a998;--line:#3d3126;--brand:#c9985a;--brand-ink:#1f1812;--brand-text:#c9985a;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body)}
+a{color:inherit}button{font:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.top{border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:14px;flex-wrap:wrap}
+.logo{font:700 24px var(--display);text-decoration:none;letter-spacing:.02em}
+nav{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+nav a,nav button.lnk{text-decoration:none;background:none;border:0;padding:0;font-weight:500;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+nav a:hover,nav button.lnk:hover{color:var(--brand-text)}
+.cartbtn{background:var(--brand);color:var(--brand-ink);border:0;border-radius:4px;padding:8px 16px;font-weight:600}
+.hero{background:linear-gradient(135deg,#5a4030,#3b2a20 55%,#241810);color:#fff;text-align:center;padding:96px 0 88px}
+.hero .btn{background:#b8864b;color:#241810;border-radius:999px;letter-spacing:.14em;text-transform:uppercase;font-size:.8rem;padding:14px 34px}
+.hero small{display:block;font:500 1.4rem var(--display);text-transform:uppercase;color:#f5f0ee;margin-bottom:8px}
+.hero h1{font:500 clamp(2.2rem,6vw,4rem)/1.1 var(--display);text-transform:uppercase;margin:0 auto 16px;max-width:18ch}
+.hero p{font-style:italic;color:#e6dac8;margin:0 0 28px;font-size:1.1rem}
+.btn{display:inline-block;background:var(--brand);color:var(--brand-ink);border:0;border-radius:4px;padding:13px 30px;font-weight:600;text-decoration:none}
+.cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;padding:56px 0 20px}
+.cat{border:0;border-radius:6px;padding:0;text-align:center;background:var(--soft);overflow:hidden}
+.cat .pic{height:190px;display:grid;place-items:center;font-size:84px}
+.cat h2{font:600 1.35rem var(--display);margin:14px 0 2px}
+.cat p{margin:0 0 18px;color:var(--muted)}
+h2.sec{font:700 clamp(1.7rem,4vw,2.3rem)/1.15 var(--display);margin:0 0 10px}
+.about{text-align:center;max-width:680px;margin:0 auto;padding:56px 0 24px}
+.about h3{font:600 1.15rem var(--body);margin:18px 0 6px}
+.about p{color:var(--muted);margin:0}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 24px}
+.chip{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:7px 16px;font-weight:500}
+.chip[aria-pressed="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.slider{position:relative}
+.grid{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding-bottom:4px}
+.grid::-webkit-scrollbar{display:none}
+.snav{position:absolute;top:70px;z-index:2;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:1.6rem;line-height:1;display:grid;place-items:center;padding:0 0 3px}
+.snav:hover:not(:disabled){background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.snav:disabled{opacity:.35;cursor:default}
+.snav.prev{left:6px}.snav.next{right:6px}
+.card{cursor:pointer}.card:hover h3{color:var(--brand-text)}
+.modal{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.open{display:flex}
+.mback{position:absolute;inset:0;background:rgba(20,12,8,.55)}
+.mbox{position:relative;background:var(--bg);border-radius:8px;max-width:720px;width:100%;max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr}
+.mpic{display:grid;place-items:center;font-size:110px;min-height:300px}
+.minfo{padding:30px 26px;display:flex;flex-direction:column;gap:8px;justify-content:center}
+.minfo h2{font:700 1.7rem/1.2 var(--display);margin:0}
+.minfo p{margin:4px 0;color:var(--muted)}
+.minfo .price{font-size:1.4rem;margin:6px 0 10px}
+.mclose{position:absolute;top:8px;right:10px;z-index:2;width:36px;height:36px;border:0;border-radius:50%;background:var(--bg);font-size:1.5rem;line-height:1}
+@media (max-width:640px){.mbox{grid-template-columns:1fr}.mpic{min-height:190px;font-size:84px}}
+@media (prefers-reduced-motion:reduce){.grid{scroll-behavior:auto}}
+.card{display:flex;flex-direction:column;flex:0 0 calc((100% - 88px)/5);min-width:190px;scroll-snap-align:start}
+.tile{height:170px;border-radius:6px;display:grid;place-items:center;font-size:60px}
+.card h3{margin:12px 0 0;font:600 1.05rem var(--body)}
+.maker{color:var(--muted);font-size:.92rem}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.price{font-weight:600}
+.add{background:none;border:1.5px solid var(--brand);color:var(--ink);border-radius:4px;padding:6px 12px;font-weight:600}
+.add:hover{background:var(--brand);color:var(--brand-ink)}
+.empty{color:var(--muted);padding:24px 0}
+.join{margin-top:72px;background:var(--soft);padding:52px 0;text-align:center}
+.social{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:16px}
+.social a{border:1.5px solid var(--ink);border-radius:999px;padding:8px 18px;text-decoration:none;font-weight:500}
+.sell{padding:56px 0;display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:start}
+.sell p{color:var(--muted);max-width:44ch}
+.mform{display:grid;gap:10px}
+.mform input,.mform select{padding:12px 14px;border-radius:4px;border:1px solid var(--line);font:inherit;background:var(--bg);color:var(--ink)}
+.msg{min-height:1.5em;font-weight:600}
+footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:.92rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.cookie{position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:560px;background:var(--ink);color:var(--bg);border-radius:8px;padding:14px 16px;display:flex;gap:14px;align-items:center;z-index:15;font-size:.92rem}
+.cookie button{background:var(--brand);color:var(--brand-ink);border:0;border-radius:4px;padding:8px 16px;font-weight:600}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,100%);background:var(--bg);border-left:1px solid var(--line);transform:translateX(100%);transition:transform .25s;z-index:20;display:flex;flex-direction:column;padding:calc(18px + env(safe-area-inset-top,0px)) 20px calc(18px + env(safe-area-inset-bottom,0px))}
+.drawer.open{transform:none}
+.dhead{display:flex;justify-content:space-between;align-items:center}
+.dhead h2{margin:0;font:600 1.4rem var(--display)}
+.dhead button{background:none;border:0;font-size:1.6rem}
+.items{flex:1;overflow:auto;margin:12px 0}
+.item{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.item .t{font-size:28px;text-align:center}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:28px;height:28px;border-radius:4px;border:1px solid var(--line);background:var(--bg)}
+.total{display:flex;justify-content:space-between;font-weight:600;font-size:1.15rem;margin-bottom:12px}
+.scrim{position:fixed;inset:0;background:rgba(20,12,8,.5);opacity:0;pointer-events:none;transition:opacity .25s;z-index:10}
+.scrim.open{opacity:1;pointer-events:auto}
+@media (prefers-reduced-motion:reduce){.drawer,.scrim{transition:none}}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap">
+  <a class="logo" href="#top">URBANSTYLE PH</a>
+  <nav>
+    <a href="#top">Home</a><a href="#shop">Shop</a><a href="#sell">Sell with us</a>
+    <button class="lnk" id="signin">Sign in</button>
+    <button class="cartbtn" id="openCart" aria-label="Open basket">Basket (<span id="count">0</span>)</button>
+  </nav>
+</div></div>
+<div id="top"></div>
+
+<section class="hero"><div class="wrap">
+  <small>Welcome!</small>
+  <h1>Trendy local collection for every occasion</h1>
+  <p>Step into style with brands made close to home.</p>
+  <a class="btn" href="#shop" data-cat="All">Shop now</a>
+</div></section>
+
+<div class="wrap">
+  <section class="cats" aria-label="Collections">
+    <div class="cat"><div class="pic" style="background:#efe4d3" aria-hidden="true">👡</div><h2>Women’s footwear</h2><p>Footwear made just for you</p><button class="btn" data-cat="Women’s footwear" style="margin-bottom:20px">Browse</button></div>
+    <div class="cat"><div class="pic" style="background:#d9c7ac" aria-hidden="true">👞</div><h2>Men’s footwear</h2><p>Footwear made just for you</p><button class="btn" data-cat="Men’s footwear" style="margin-bottom:20px">Browse</button></div>
+    <div class="cat"><div class="pic" style="background:#cfb592" aria-hidden="true">👜</div><h2>Bag collection</h2><p>Best collection of bags</p><button class="btn" data-cat="Bags" style="margin-bottom:20px">Browse</button></div>
+  </section>
+
+  <section class="about">
+    <h2 class="sec">One shop for many local brands</h2>
+    <p>UrbanStyle PH brings independent shoe, sandal and bag makers together. Browse casual to elegant styles, add pieces from different brands to one basket, and support the people who make them.</p>
+  </section>
+
+  <section id="shop">
+    <h2 class="sec">Featured products</h2>
+    <div class="filters" id="filters" role="group" aria-label="Filter by category"></div>
+    <div class="slider"><button class="snav prev" id="prev" aria-label="Previous products">‹</button><div class="grid" id="grid" role="list"></div><button class="snav next" id="next" aria-label="Next products">›</button></div>
+    <div class="empty" id="empty" hidden>No products in this category yet.</div>
+  </section>
+</div>
+
+<section class="join"><div class="wrap">
+  <h2 class="sec">Join our community</h2>
+  <p>Follow new drops and maker stories.</p>
+  <div class="social"><a href="https://www.facebook.com/urbanstyle.phofficial" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.instagram.com/urbanstyle.phofficial/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.tiktok.com/@urbanstyle.phofficial" target="_blank" rel="noopener noreferrer">TikTok</a></div>
+</div></section>
+
+<div class="wrap">
+  <section class="sell" id="sell">
+    <div><h2 class="sec">Run a local brand?</h2><p>List your shoes, sandals or bags for free. We take a small fee only when you make a sale.</p></div>
+    <div class="mform">
+      <input id="bn" placeholder="Brand name" aria-label="Brand name">
+      <input id="be" type="email" placeholder="Email" aria-label="Email">
+      <select id="bc" aria-label="Category"><option>Women’s footwear</option><option>Men’s footwear</option><option>Bags</option></select>
+      <button class="btn" id="apply">Apply to sell</button>
+      <div class="msg" id="msg" role="status"></div>
+    </div>
+  </section>
+  <footer><span>© 2026 UrbanStyle PH</span><span>Terms and conditions · Sample storefront with placeholder products</span></footer>
+</div>
+
+<div class="cookie" id="cookie" role="region" aria-label="Cookies"><span>This website uses cookies to analyze traffic and improve your experience.</span><button id="accept">Accept</button></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mname" aria-hidden="true"><div class="mback" id="mback"></div><div class="mbox"><button class="mclose" id="mclose" aria-label="Close product">×</button><div class="mpic" id="mpic" aria-hidden="true"></div><div class="minfo"><span class="maker" id="mcat"></span><h2 id="mname"></h2><span class="maker" id="mmaker"></span><p id="mdesc"></p><div class="price" id="mprice"></div><button class="btn" id="madd">Add to basket</button></div></div></div>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Basket" aria-hidden="true">
+  <div class="dhead"><h2>Your basket</h2><button id="closeCart" aria-label="Close basket">×</button></div>
+  <div class="items" id="items"></div>
+  <div class="total"><span>Subtotal</span><span id="sub">₱0</span></div>
+  <button class="btn" id="checkout">Check out</button>
+  <div class="msg" id="cmsg" role="status" style="margin-top:8px"></div>
+</aside>
+
+<script>
+const W="Women’s footwear",M="Men’s footwear",B="Bags";
+const P=[
+{id:1,n:"Woven slide sandal",m:"Habi Footwear",c:W,p:899,e:"👡",bg:"#f0d5c6"},
+{id:2,n:"Strappy block heel",m:"Lakad Atelier",c:W,p:1450,e:"👠",bg:"#ecc9c0"},
+{id:3,n:"Everyday flat",m:"Habi Footwear",c:W,p:1099,e:"🥿",bg:"#f2dcc9"},
+{id:4,n:"Leather slip-on",m:"Tahi Leatherworks",c:M,p:1850,e:"👞",bg:"#dfd0c0"},
+{id:5,n:"Trail sandal",m:"Lakad Atelier",c:M,p:1250,e:"🩴",bg:"#d6cbbd"},
+{id:6,n:"Canvas sneaker",m:"Bayan Kicks",c:M,p:1590,e:"👟",bg:"#cfd6d8"},
+{id:7,n:"Abaca crossbody bag",m:"Habi Weaves",c:B,p:1350,e:"👜",bg:"#e8cfb0"},
+{id:8,n:"Leather tote",m:"Tahi Leatherworks",c:B,p:2400,e:"👝",bg:"#dcc3a8"},
+{id:9,n:"Mini bucket bag",m:"Habi Weaves",c:B,p:980,e:"🛍️",bg:"#efd9c2"},
+{id:10,n:"Everyday backpack",m:"Bayan Kicks",c:B,p:1750,e:"🎒",bg:"#d5d0c6"}
+];
+const cats=["All",W,M,B];
+const TONES=["#e6dac8","#efe4d3","#d9c7ac","#cfb592"];
+let cat="All",cart={};
+const $=id=>document.getElementById(id);
+const peso=n=>"₱"+n.toLocaleString("en-PH");
+function renderFilters(){$("filters").innerHTML=cats.map(c=>`<button class="chip" aria-pressed="${c===cat}" data-c="${c}">${c}</button>`).join("")}
+function renderGrid(){
+  const list=P.filter(x=>cat==="All"||x.c===cat);
+  $("empty").hidden=list.length>0;$("grid").scrollLeft=0;requestAnimationFrame(upd);
+  $("grid").innerHTML=list.map(x=>`<article class="card" data-view="${x.id}" tabindex="0" role="listitem" aria-label="View ${x.n}"><div class="tile" style="background:${TONES[x.id%4]}" aria-hidden="true">${x.e}</div>
+  <h3>${x.n}</h3><span class="maker">by ${x.m}</span>
+  <div class="row"><span class="price">${peso(x.p)}</span></div></article>`).join("");
+}
+function renderCart(){
+  const ids=Object.keys(cart);let sub=0,n=0;
+  $("items").innerHTML=ids.length?ids.map(id=>{
+    const x=P.find(p=>p.id==id),q=cart[id];sub+=x.p*q;n+=q;
+    return `<div class="item"><div class="t">${x.e}</div><div><strong>${x.n}</strong><div class="qty"><button data-d="-1" data-id="${id}" aria-label="Remove one">−</button>${q}<button data-d="1" data-id="${id}" aria-label="Add one">+</button></div></div><div>${peso(x.p*q)}</div></div>`;
+  }).join(""):`<p class="empty">Your basket is empty. Add something from a local maker.</p>`;
+  $("sub").textContent=peso(sub);$("count").textContent=n;
+}
+function toggle(o){$("drawer").classList.toggle("open",o);$("scrim").classList.toggle("open",o);$("drawer").setAttribute("aria-hidden",!o);if(o)$("closeCart").focus()}
+function setCat(c){cat=c;renderFilters();renderGrid();$("shop").scrollIntoView({behavior:"smooth"})}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-cat]");if(b){if(b.tagName==="A")e.preventDefault();setCat(b.dataset.cat)}});
+$("filters").onclick=e=>{const b=e.target.closest("[data-c]");if(!b)return;cat=b.dataset.c;renderFilters();renderGrid()};
+const DESC={[W]:"Locally made women’s footwear, designed for comfort from day to night.",[M]:"Locally made men’s footwear, built for everyday wear.",[B]:"A locally made bag with room for your daily essentials."};
+let cur=null,lastCard=null;
+function openView(id,el){cur=P.find(p=>p.id==id);lastCard=el;$("mpic").textContent=cur.e;$("mpic").style.background=TONES[cur.id%4];$("mcat").textContent=cur.c;$("mname").textContent=cur.n;$("mmaker").textContent="by "+cur.m;$("mdesc").textContent=DESC[cur.c];$("mprice").textContent=peso(cur.p);$("modal").classList.add("open");$("modal").setAttribute("aria-hidden","false");$("mclose").focus()}
+function closeView(){$("modal").classList.remove("open");$("modal").setAttribute("aria-hidden","true");if(lastCard){lastCard.focus({preventScroll:true});lastCard=null}}
+$("grid").onclick=e=>{const c=e.target.closest("[data-view]");if(c)openView(c.dataset.view,c)};
+$("grid").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){const c=e.target.closest("[data-view]");if(c){e.preventDefault();openView(c.dataset.view,c)}}});
+$("mclose").onclick=$("mback").onclick=closeView;
+$("madd").onclick=()=>{cart[cur.id]=(cart[cur.id]||0)+1;$("cmsg").textContent="";renderCart();lastCard=null;closeView();toggle(true)};
+$("items").onclick=e=>{const b=e.target.closest("[data-d]");if(!b)return;const id=b.dataset.id;cart[id]+=+b.dataset.d;if(cart[id]<=0)delete cart[id];renderCart()};
+$("openCart").onclick=()=>toggle(true);
+$("closeCart").onclick=$("scrim").onclick=()=>toggle(false);
+document.onkeydown=e=>{if(e.key==="Escape"){toggle(false);closeView()}};
+$("accept").onclick=()=>$("cookie").remove();
+$("signin").onclick=()=>{$("msg").textContent="";document.getElementById("sell").scrollIntoView({behavior:"smooth"});$("msg").textContent="Sign-in isn’t connected yet. Apply to sell below to get early access."};
+$("checkout").onclick=()=>{$("cmsg").textContent=Object.keys(cart).length?"Checkout isn’t connected yet. This is a preview.":"Add an item to check out."};
+$("apply").onclick=()=>{const ok=$("bn").value.trim()&&/\S+@\S+\.\S+/.test($("be").value);$("msg").textContent=ok?"Thanks, "+$("bn").value.trim()+". We’ll be in touch by email.":"Enter your brand name and a valid email."};
+function upd(){const g=$("grid"),few=g.scrollWidth<=g.clientWidth+4;$("prev").hidden=$("next").hidden=few;$("prev").disabled=g.scrollLeft<4;$("next").disabled=g.scrollLeft+g.clientWidth>=g.scrollWidth-4}
+$("prev").onclick=()=>$("grid").scrollBy({left:-$("grid").clientWidth-22});
+$("next").onclick=()=>$("grid").scrollBy({left:$("grid").clientWidth+22});
+$("grid").addEventListener("scroll",upd,{passive:true});
+window.addEventListener("resize",upd);
+renderFilters();renderGrid();renderCart();
+</script>
+</body>
+</html>
